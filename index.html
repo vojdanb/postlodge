@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PostLodge — Stop Buying Attention. Start Earning It.</title>
+<meta name="description" content="PostLodge helps CMOs and founders scale LinkedIn content across their GTM team — each post in each person's authentic voice, governed by your brand. Cut LinkedIn ad spend by up to 60%.">
+<meta property="og:title" content="PostLodge — Stop Buying Attention. Start Earning It.">
+<meta property="og:description" content="AI-powered LinkedIn content for your whole GTM team. Every voice. Zero ad spend.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://postlodge.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --green-800: #166534;
+    --green-900: #14532d;
+    --green-950: #0f1a0f;
+    --yellow: #fbbf24;
+    --yellow-dark: #f59e0b;
+    --dark: #0f1a0f;
+    --dark-2: #111827;
+    --light: #f0fdf4;
+    --white: #ffffff;
+    --text-dark: #111827;
+    --text-light: #f9fafb;
+    --text-muted: #6b7280;
+    --font-head: 'Fraunces', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --radius: 16px;
+    --radius-sm: 8px;
+    --radius-lg: 24px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.15; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(15, 26, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(34, 197, 94, 0.15);
+    padding: 0 24px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* LOGO: Replace with <img src="logo.svg"> */
+  .nav-logo-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-text {
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(249,250,251,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: var(--transition);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--text-light);
+    background: rgba(34, 197, 94, 0.12);
+  }
+
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 2px;
+    background: var(--green-500);
+    border-radius: 2px;
+  }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--green-500), var(--green-600));
+    color: white !important;
+    padding: 8px 20px !important;
+    border-radius: 24px !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-cta:hover {
+    background: linear-gradient(135deg, var(--green-400), var(--green-500)) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.45) !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-light);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(15, 26, 15, 0.97);
+    backdrop-filter: blur(16px);
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.15);
+    z-index: 999;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: rgba(249,250,251,0.8);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+    color: var(--green-400);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ===== PAGE SYSTEM ===== */
+  .page { display: none; }
+  .page.active { display: block; }
+  main { padding-top: 68px; }
+
+  /* ===== UTILITY ===== */
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 96px 0; }
+  .section-sm { padding: 64px 0; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 32px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green-500), var(--green-600));
+    color: white;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--green-400), var(--green-500));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(34, 197, 94, 0.5);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-light);
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--green-400);
+    color: var(--green-400);
+    background: rgba(34, 197, 94, 0.08);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .badge-green {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--green-400);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+  }
+
+  .badge-yellow {
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--yellow-dark);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 100px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 50%, rgba(22, 163, 74, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(21, 128, 61, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--text-light);
+    line-height: 1.08;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-400);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(249,250,251,0.7);
+    max-width: 640px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: rgba(249,250,251,0.45);
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .hero-trust span { display: flex; align-items: center; gap: 6px; }
+
+  .hero-savings {
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .savings-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    color: var(--yellow);
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.1); }
+    50% { box-shadow: 0 0 20px 4px rgba(251, 191, 36, 0.15); }
+  }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof {
+    background: var(--light);
+    padding: 28px 0;
+    border-top: 1px solid rgba(21, 128, 61, 0.1);
+    border-bottom: 1px solid rgba(21, 128, 61, 0.1);
+  }
+
+  .social-proof-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .social-proof-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .proof-logos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .proof-logo {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.05);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.06);
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-it-works {
+    background: var(--dark);
+    padding: 96px 0;
+  }
+
+  .section-label {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto 56px;
+  }
+
+  .how-it-works .section-title { color: var(--text-light); }
+  .how-it-works .section-sub { color: rgba(249,250,251,0.5); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .step-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(34, 197, 94, 0.12);
+    border-left: 3px solid var(--green-500);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    transition: var(--transition);
+  }
+
+  .step-card:hover {
+    background: rgba(34, 197, 94, 0.05);
+    border-color: rgba(34, 197, 94, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .step-num {
+    position: absolute;
+    top: -14px; right: 24px;
+    background: linear-gradient(135deg, var(--green-500), var(--green-600));
+    color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .step-icon { font-size: 2rem; margin-bottom: 16px; }
+
+  .step-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .step-card p {
+    font-size: 0.9rem;
+    color: rgba(249,250,251,0.55);
+    line-height: 1.65;
+  }
+
+  /* ===== WHY POSTLODGE ===== */
+  .why {
+    background: var(--light);
+    padding: 96px 0;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .compare-table {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .compare-header {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    padding: 16px 24px;
+    background: var(--dark);
+    gap: 12px;
+  }
+
+  .compare-header span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(249,250,251,0.5);
+  }
+
+  .compare-header span:last-child { color: var(--green-400); }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    padding: 14px 24px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    align-items: center;
+    transition: var(--transition);
+  }
+
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:hover { background: var(--light); }
+
+  .compare-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .compare-bad {
+    font-size: 0.8rem;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .compare-good {
+    font-size: 0.8rem;
+    color: var(--green-600);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stats-card {
+    background: linear-gradient(135deg, var(--green-800), var(--green-900), var(--dark));
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .stat-item { position: relative; z-index: 1; }
+
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--green-400);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: rgba(249,250,251,0.6);
+    line-height: 1.4;
+  }
+
+  /* ===== FREE POST GENERATOR ===== */
+  .generator {
+    background: var(--white);
+    padding: 96px 0;
+  }
+
+  .generator-card {
+    background: white;
+    border: 2px solid var(--green-500);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    max-width: 680px;
+    margin: 0 auto;
+    box-shadow: 0 8px 40px rgba(34, 197, 94, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .generator-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-500), var(--green-400), var(--yellow));
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  textarea, select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    transition: var(--transition);
+    background: white;
+    resize: vertical;
+    outline: none;
+  }
+
+  textarea:focus, select:focus {
+    border-color: var(--green-500);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  }
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+  }
+
+  .form-row .form-group { flex: 1; }
+
+  .btn-generate {
+    width: 100%;
+    background: linear-gradient(135deg, var(--green-500), var(--green-600));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .btn-generate:hover {
+    background: linear-gradient(135deg, var(--green-400), var(--green-500));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+  }
+
+  .btn-generate.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  .btn-generate.loading .spinner { display: block; }
+  .btn-generate.loading .btn-text { display: none; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s ease both;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(0,0,0,0.05);
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: var(--transition);
+  }
+
+  .modal-close:hover { background: rgba(0,0,0,0.1); color: var(--text-dark); }
+
+  .modal-header { margin-bottom: 24px; text-align: center; }
+
+  .modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .li-post-preview {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .li-post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .li-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-500), var(--green-700));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .li-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+
+  .li-title {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .li-post-text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #1a1a1a;
+  }
+
+  .li-post-text strong { font-weight: 700; }
+
+  .li-reactions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .modal-upsell {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-upsell p {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+
+  .modal-fine {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials {
+    background: var(--dark);
+    padding: 96px 0;
+  }
+
+  .testimonials .section-title { color: var(--text-light); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testi-card {
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  .testi-card:nth-child(1) {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .testi-card:nth-child(2) {
+    background: linear-gradient(135deg, var(--green-800), var(--green-900));
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .testi-card:nth-child(3) {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .testi-stars {
+    color: var(--yellow);
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .testi-quote {
+    font-size: 0.95rem;
+    color: rgba(249,250,251,0.85);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-600), var(--green-800));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .testi-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+
+  .testi-role {
+    font-size: 0.75rem;
+    color: rgba(249,250,251,0.45);
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    background: linear-gradient(135deg, var(--green-700), var(--green-800), var(--green-900));
+    padding: 96px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 70% at 50% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text-light);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .final-cta p {
+    color: rgba(249,250,251,0.65);
+    max-width: 480px;
+    margin: 0 auto 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .final-cta .btn-primary {
+    position: relative;
+    z-index: 1;
+    font-size: 1.05rem;
+    padding: 16px 36px;
+  }
+
+  /* ===== ABOUT PAGE ===== */
+  .about-hero {
+    background: var(--dark);
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--text-light);
+    margin-bottom: 24px;
+  }
+
+  .about-hero h1 em {
+    font-style: italic;
+    color: var(--green-400);
+  }
+
+  .about-hero p {
+    font-size: 1.1rem;
+    color: rgba(249,250,251,0.65);
+    max-width: 600px;
+    line-height: 1.75;
+  }
+
+  .mission-section { background: var(--light); padding: 96px 0; }
+
+  .mission-card {
+    background: linear-gradient(135deg, var(--green-700), var(--green-800));
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .mission-card p {
+    font-size: 1.25rem;
+    color: rgba(249,250,251,0.9);
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+    font-family: var(--font-head);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .pillar-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    transition: var(--transition);
+  }
+
+  .pillar-card:hover {
+    border-color: var(--green-400);
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .pillar-icon { font-size: 1.75rem; margin-bottom: 14px; }
+
+  .pillar-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+  }
+
+  .pillar-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .team-section { background: white; padding: 96px 0; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .team-card:hover {
+    border-color: var(--green-400);
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.1);
+  }
+
+  .team-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+  }
+
+  .team-avatar.founder {
+    background: linear-gradient(135deg, var(--green-500), var(--green-700));
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    font-family: var(--font-head);
+  }
+
+  .team-avatar.hiring {
+    background: var(--light);
+    border: 2px dashed var(--green-400);
+    color: var(--green-500);
+    font-size: 1.75rem;
+  }
+
+  .team-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .team-role {
+    font-size: 0.8rem;
+    color: var(--green-600);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+
+  .team-bio {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== SERVICES PAGE ===== */
+  .services-hero {
+    background: var(--dark);
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 70% 40%, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .services-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+
+  .services-hero p {
+    font-size: 1.1rem;
+    color: rgba(249,250,251,0.6);
+    max-width: 520px;
+  }
+
+  .services-section { background: var(--light); padding: 96px 0; }
+
+  .service-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 80px;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition: var(--transition);
+  }
+
+  .service-card:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+
+  .service-card.platform::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-500), var(--green-400));
+  }
+
+  .service-card.whiteglove::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--yellow-dark), var(--yellow));
+  }
+
+  .service-tag {
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+
+  .service-card .desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    color: var(--green-500);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-section { background: white; padding: 96px 0; }
+  .faq-section.dark-bg { background: var(--dark); }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .faq-section.dark-bg .faq-item {
+    border-color: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .faq-item.open {
+    border-color: var(--green-400);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 24px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: var(--transition);
+  }
+
+  .faq-section.dark-bg .faq-question { color: var(--text-light); }
+
+  .faq-question:hover { background: rgba(34, 197, 94, 0.04); }
+
+  .faq-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    color: var(--green-600);
+    transition: var(--transition);
+  }
+
+  .faq-section.dark-bg .faq-icon {
+    background: rgba(255,255,255,0.08);
+    color: var(--green-400);
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--green-500); color: white; }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-answer-inner {
+    padding: 0 24px 20px;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .faq-section.dark-bg .faq-answer-inner { color: rgba(249,250,251,0.55); }
+
+  /* ===== PRICING PAGE ===== */
+  .pricing-hero {
+    background: var(--dark);
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 20%, rgba(34, 197, 94, 0.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .pricing-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--text-light);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .pricing-hero p {
+    font-size: 1.05rem;
+    color: rgba(249,250,251,0.6);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+
+  .pricing-toggle {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .toggle-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(249,250,251,0.6);
+  }
+
+  .toggle-label.active { color: var(--text-light); }
+
+  .toggle-switch {
+    width: 52px; height: 28px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .toggle-switch.on { background: var(--green-500); border-color: var(--green-500); }
+
+  .toggle-knob {
+    position: absolute;
+    width: 22px; height: 22px;
+    background: white;
+    border-radius: 50%;
+    top: 2px; left: 2px;
+    transition: var(--transition);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .toggle-switch.on .toggle-knob { transform: translateX(24px); }
+
+  .annual-badge {
+    background: rgba(251, 191, 36, 0.2);
+    color: var(--yellow);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+
+  .pricing-section { background: var(--light); padding: 80px 0; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .pricing-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    position: relative;
+    transition: var(--transition);
+  }
+
+  .pricing-card:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+
+  .pricing-card.featured {
+    border: 2px solid var(--green-500);
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.15);
+  }
+
+  .pricing-card.featured:hover {
+    box-shadow: 0 16px 48px rgba(34, 197, 94, 0.2);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -14px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--yellow-dark), var(--yellow));
+    color: var(--dark);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 5px 14px;
+    border-radius: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4);
+  }
+
+  .plan-name {
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+  }
+
+  .plan-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .plan-price {
+    margin-bottom: 4px;
+  }
+
+  .price-amount {
+    font-family: var(--font-head);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .price-amount.custom {
+    font-size: 1.75rem;
+    color: var(--green-600);
+  }
+
+  .price-period {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .price-annual {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    min-height: 1.2rem;
+  }
+
+  .price-annual s { color: #ef4444; }
+  .price-annual strong { color: var(--green-600); }
+
+  .plan-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin: 20px 0;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+  }
+
+  .plan-features li .check {
+    color: var(--green-500);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .roi-card {
+    background: linear-gradient(135deg, var(--green-800), var(--green-900));
+    border-radius: var(--radius-lg);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .roi-text { flex: 1; min-width: 260px; }
+
+  .roi-text p {
+    font-size: 1.1rem;
+    color: rgba(249,250,251,0.9);
+    line-height: 1.6;
+  }
+
+  .roi-text p strong { color: var(--green-400); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    padding: 64px 0 0;
+    border-top: 1px solid rgba(34, 197, 94, 0.1);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand .tagline {
+    font-size: 0.875rem;
+    color: rgba(249,250,251,0.45);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(249,250,251,0.35);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col a {
+    color: rgba(249,250,251,0.55);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .footer-col a:hover { color: var(--green-400); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-copy {
+    font-size: 0.775rem;
+    color: rgba(249,250,251,0.3);
+  }
+
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-social-text {
+    font-size: 0.775rem;
+    color: rgba(249,250,251,0.3);
+    font-style: italic;
+  }
+
+  .social-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    color: rgba(249,250,251,0.5);
+    text-decoration: none;
+  }
+
+  .social-icon:hover {
+    background: var(--green-600);
+    color: white;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .steps-grid, .why-grid, .testi-grid, .pillars-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .service-cards-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .roi-card { flex-direction: column; text-align: center; }
+    .compare-header, .compare-row { font-size: 0.75rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+    .form-row { flex-direction: column; }
+  }
+
+  @media (max-width: 600px) {
+    .section { padding: 64px 0; }
+    .generator-card { padding: 28px 20px; }
+    .modal { padding: 28px 20px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .about-hero, .services-hero, .pricing-hero { padding: 80px 0 60px; }
+    .stats-card { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <a class="nav-logo" onclick="showPage('home')">
+    <!-- LOGO: Replace with <img src="logo.svg"> -->
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE0GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTA3LTIwPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjVlMTllMjc0LWUyYzktNGFlMy04MmJlLTY5ZmI5YjllYzIxMzwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5VbnRpdGxlZCBkZXNpZ24gLSA0PC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlv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" alt="PostLodge" class="nav-logo-img">
+    <span class="nav-logo-text">PostLodge</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('pricing')" id="nav-pricing">Pricing</a></li>
+  </ul>
+  <a href="https://postlodge.app" target="_blank" class="nav-cta">Try for Free</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');toggleMobile()">Home</a>
+  <a onclick="showPage('about');toggleMobile()">About</a>
+  <a onclick="showPage('services');toggleMobile()">Services</a>
+  <a onclick="showPage('pricing');toggleMobile()">Pricing</a>
+  <a href="https://postlodge.app" target="_blank">Try for Free →</a>
+</div>
+
+<main>
+
+<!-- ===================== HOME PAGE ===================== -->
+<section id="page-home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero" id="hero-top">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="badge badge-green">✦ Stop buying attention. Start earning it.</span>
+        </div>
+        <h1>Your team.<br><em>Every voice.</em><br>Zero ad spend.</h1>
+        <p class="hero-sub">PostLodge helps CMOs and founders scale LinkedIn content across their entire GTM team — each post written in each person's authentic voice, governed by your brand. Stop paying LinkedIn. Start owning reach.</p>
+        <div class="hero-ctas">
+          <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Try for Free — No Credit Card Needed</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})" class="btn btn-ghost">See How It Works</a>
+        </div>
+        <div class="hero-trust">
+          <span>✦ No credit card needed</span>
+          <span>✦ Cancel anytime</span>
+          <span>✦ GDPR compliant</span>
+        </div>
+        <div class="hero-savings">
+          <span class="savings-badge">💰 Teams save $3K–$15K/month on LinkedIn Ads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-label">
+        <span class="tag badge-green" style="background:rgba(34,197,94,0.12);color:var(--green-400);padding:6px 16px;">How It Works</span>
+      </div>
+      <h2 class="section-title">From campaign brief to<br>team-wide posts in minutes</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon">🎯</div>
+          <h3>Define the campaign</h3>
+          <p>Enter your campaign topic, goals, and key messages once. That's the only brief your whole team needs.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon">🧠</div>
+          <h3>AI matches every voice</h3>
+          <p>PostLodge analyzes each team member's LinkedIn history and generates posts that actually sound like them — not like AI.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon">📅</div>
+          <h3>Review, schedule, post</h3>
+          <p>Your team gets ready-to-post content. They review, approve, and publish — you stay in control. No bots, no ToS violations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY POSTLODGE -->
+  <div class="why">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom:48px;">LinkedIn ads are renting reach.<br>PostLodge helps you <em style="font-style:italic;color:var(--green-600);">own</em> it.</h2>
+      <div class="why-grid">
+        <div>
+          <div class="compare-table">
+            <div class="compare-header">
+              <span>Category</span>
+              <span>LinkedIn Ads</span>
+              <span>PostLodge</span>
+            </div>
+            <div class="compare-row">
+              <span class="compare-label">Cost</span>
+              <span class="compare-bad">✗ $5–$15 per click</span>
+              <span class="compare-good">✓ Flat per-seat price</span>
+            </div>
+            <div class="compare-row">
+              <span class="compare-label">Authenticity</span>
+              <span class="compare-bad">✗ Feels like an ad</span>
+              <span class="compare-good">✓ Real person's voice</span>
+            </div>
+            <div class="compare-row">
+              <span class="compare-label">Scale</span>
+              <span class="compare-bad">✗ One message</span>
+              <span class="compare-good">✓ Personal per teammate</span>
+            </div>
+            <div class="compare-row">
+              <span class="compare-label">Reach</span>
+              <span class="compare-bad">✗ Paid only</span>
+              <span class="compare-good">✓ Organic + boosted</span>
+            </div>
+            <div class="compare-row">
+              <span class="compare-label">ROI</span>
+              <span class="compare-bad">✗ Hard to attribute</span>
+              <span class="compare-good">✓ Measurable per person</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="stats-card">
+            <div class="stat-item">
+              <div class="stat-num">47%</div>
+              <div class="stat-label">higher engagement vs sponsored LinkedIn content</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">$8,400</div>
+              <div class="stat-label">average monthly LinkedIn ad spend saved per team</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">10×</div>
+              <div class="stat-label">more content output with the same team size</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FREE POST GENERATOR -->
+  <div class="generator">
+    <div class="container">
+      <div class="section-label" style="text-align:center;margin-bottom:12px;">
+        <span class="tag" style="background:rgba(34,197,94,0.1);color:var(--green-600);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Free Tool</span>
+      </div>
+      <h2 class="section-title" style="margin-bottom:12px;">Generate your next LinkedIn post — for free</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Tell us what your next campaign is about, and we'll write a post in your team's voice. No signup required — just results.</p>
+      <div class="generator-card">
+        <div class="form-group">
+          <label class="form-label">What is your next campaign about?</label>
+          <textarea id="campaignInput" rows="4" placeholder="e.g. 'Launching our new AI feature for RevOps teams'" style="min-height:100px;"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Whose voice?</label>
+            <select id="voiceSelect">
+              <option value="Founder">Founder</option>
+              <option value="Head of Marketing">Head of Marketing</option>
+              <option value="AE">Account Executive (AE)</option>
+              <option value="SDR">SDR</option>
+              <option value="CSM">Customer Success Manager</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-generate" id="generateBtn" onclick="handleGenerate()">
+          <div class="spinner" id="generateSpinner"></div>
+          <span class="btn-text" id="generateText">✨ Generate My Free Post</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="postModal" onclick="handleModalClick(event)">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div style="font-size:2rem;margin-bottom:8px;">🎉</div>
+        <h3>Your post is ready!</h3>
+        <p style="font-size:0.875rem;color:var(--text-muted);">Here's what PostLodge generated for your campaign</p>
+      </div>
+      <div class="li-post-preview">
+        <div class="li-post-header">
+          <div class="li-avatar" id="postAvatar">V</div>
+          <div>
+            <div class="li-name" id="postName">Vojdan M.</div>
+            <div class="li-title" id="postTitle">Founder at PostLodge • 1st</div>
+          </div>
+        </div>
+        <div class="li-post-text" id="postContent">
+          <strong>We spent $12K on LinkedIn ads last quarter.</strong><br><br>
+          Here's what we got: mediocre CTR, generic impressions, and zero relationship building.<br><br>
+          Then we tried something different.<br><br>
+          Instead of running ads, we had each person on our GTM team share their perspective on the same campaign — in their own words, their own style.<br><br>
+          The result? 3x more pipeline conversations. 0 ad spend.<br><br>
+          Authentic voices outperform polished copy every time. 🌲<br><br>
+          What's your take — is employee advocacy underrated in B2B?
+        </div>
+        <div class="li-reactions">
+          <span>👍 ❤️ 💡</span>
+          <span>47 reactions · 12 comments</span>
+        </div>
+      </div>
+      <div class="modal-upsell">
+        <p>Want to generate posts for your whole team, in everyone's voice?</p>
+        <a href="https://postlodge.app" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">Create Your Free Account →</a>
+        <p class="modal-fine">No credit card needed. Setup takes 3 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <div class="container">
+      <h2>Your competitors are paying for reach.<br>You don't have to.</h2>
+      <p>Join GTM teams who've already replaced LinkedIn ad spend with authentic, scalable employee content.</p>
+      <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Start Free — No Card Required</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== ABOUT PAGE ===================== -->
+<section id="page-about" class="page">
+
+  <div class="about-hero">
+    <div class="container">
+      <span class="tag" style="background:rgba(34,197,94,0.12);color:var(--green-400);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;display:inline-block;margin-bottom:24px;">Our Story</span>
+      <h1>Built by a seller.<br><em>For teams that need to be heard.</em></h1>
+      <p>I was an SDR watching our company burn through LinkedIn ad budget every month. Good impressions, bad outcomes. I kept thinking: our team has real voices, real stories, real credibility — why are we buying attention instead of earning it? So I built PostLodge to prove the better way exists. Authentic employee voices, at scale, governed by your brand. No more renting reach you should already own.</p>
+    </div>
+  </div>
+
+  <div class="mission-section">
+    <div class="container">
+      <div class="mission-card">
+        <p>"PostLodge exists to give every B2B team the unfair advantage of consistent, authentic LinkedIn presence — without the ad spend."</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🌱</div>
+          <h3>Authenticity First</h3>
+          <p>Every post sounds like a real human because it is generated from one. We analyze actual writing patterns — not generic AI templates.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🔒</div>
+          <h3>Brand Governance</h3>
+          <p>Marketing stays in control without micromanaging everyone's posts. Set guardrails, not mandates. Your team posts freely within your brand.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">💡</div>
+          <h3>Leverage Over Spend</h3>
+          <p>Content compounds. Ads expire. Every post your team publishes builds organic reach, trust, and inbound pipeline that outlasts any campaign.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-section">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom:12px;">We're a small team<br>with big conviction</h2>
+      <p class="section-sub" style="margin-bottom:48px;">Built lean. Shipping fast. Obsessed with helping GTM teams own their LinkedIn presence.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar founder">V</div>
+          <div class="team-name">Vojdan</div>
+          <div class="team-role">Founder & CEO</div>
+          <p class="team-bio">Former SDR turned builder. Spent years in the GTM trenches before building the tool he always wished existed.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar hiring">+</div>
+          <div class="team-name">You?</div>
+          <div class="team-role">We're Hiring</div>
+          <p class="team-bio">We're looking for builders who care about authentic B2B marketing. Come help us change how GTM teams show up on LinkedIn.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-cta">
+    <div class="container">
+      <h2>Ready to stop renting reach?</h2>
+      <p>Try PostLodge free — no credit card, no commitment. Just better LinkedIn content.</p>
+      <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Try for Free</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== SERVICES PAGE ===================== -->
+<section id="page-services" class="page">
+
+  <div class="services-hero">
+    <div class="container">
+      <span class="tag" style="background:rgba(34,197,94,0.12);color:var(--green-400);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;display:inline-block;margin-bottom:24px;">Services</span>
+      <h1>Two ways to work<br>with PostLodge</h1>
+      <p>Whether you want to run it yourself or have us do it for you — we've got a path that fits where your team is today.</p>
+    </div>
+  </div>
+
+  <div class="services-section">
+    <div class="container">
+      <div class="service-cards-grid">
+
+        <div class="service-card platform">
+          <div class="service-tag">
+            <span class="tag" style="background:rgba(34,197,94,0.1);color:var(--green-600);padding:5px 12px;border-radius:16px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Self-Serve Platform</span>
+          </div>
+          <h3>PostLodge Platform</h3>
+          <p class="desc">Your entire GTM team. One campaign brief. Unlimited authentic voices. The platform does the heavy lifting — you stay in control.</p>
+          <ul class="feature-list">
+            <li>AI voice matching per team member (trained on their actual LinkedIn posts)</li>
+            <li>Campaign creation from a single brief</li>
+            <li>Brand governance and post approval workflows</li>
+            <li>Chrome extension for seamless LinkedIn integration</li>
+            <li>Visual calendar for scheduling and planning</li>
+            <li>AI comment generator for engaging your network</li>
+          </ul>
+          <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Try for Free</a>
+        </div>
+
+        <div class="service-card whiteglove">
+          <div class="service-tag">
+            <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--yellow-dark);padding:5px 12px;border-radius:16px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Done For You</span>
+          </div>
+          <h3>PostLodge Done-For-You</h3>
+          <p class="desc">For teams spending $10K+/month on LinkedIn ads who want a full-service alternative with zero internal lift. We handle everything.</p>
+          <ul class="feature-list">
+            <li>Everything in the platform, fully managed by our team</li>
+            <li>Dedicated SMM for short-form video content (LinkedIn native + Reels-style)</li>
+            <li>Monthly strategy sessions and content calendar</li>
+            <li>Human review and publishing assistance</li>
+            <li>Onboarding, voice profiling, and brand setup included</li>
+            <li>Ideal for teams replacing $10K+/mo in LinkedIn ad spend</li>
+          </ul>
+          <a href="/cdn-cgi/l/email-protection#93fbf6fffffcd3e3fce0e7fffcf7f4f6bdf2e3e3" class="btn" style="background:linear-gradient(135deg,var(--yellow-dark),var(--yellow));color:var(--dark);box-shadow:0 4px 16px rgba(251,191,36,0.35);font-weight:700;">Book a Call</a>
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <div id="services-faq">
+        <h2 class="section-title" style="margin-bottom:12px;">Questions we get a lot</h2>
+        <p class="section-sub" style="margin-bottom:40px;">Honest answers to the things every CMO and founder asks before signing up.</p>
+        <div class="faq-list">
+          <div class="faq-item" id="faq1">
+            <button class="faq-question" onclick="toggleFaq('faq1')">
+              How is this different from just using ChatGPT?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq1-answer">
+              <div class="faq-answer-inner">ChatGPT generates generic content. PostLodge analyzes each team member's actual LinkedIn posts, extracts their tone, vocabulary, and communication patterns, then generates content that sounds like <em>them</em> — not like AI. It also handles brand governance, campaign management, multi-person workflows, and scheduling. ChatGPT is a blank canvas. PostLodge is a purpose-built GTM content engine.</div>
+            </div>
+          </div>
+          <div class="faq-item" id="faq2">
+            <button class="faq-question" onclick="toggleFaq('faq2')">
+              Is this compliant with LinkedIn's Terms of Service?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq2-answer">
+              <div class="faq-answer-inner">Yes. PostLodge does not auto-publish anything to LinkedIn. Every post requires manual review and manual posting by the team member. We use LinkedIn profile data only for style analysis — no scraping at scale, no bots, no automation that violates LinkedIn's ToS. Your team stays in full control of what goes live and when.</div>
+            </div>
+          </div>
+          <div class="faq-item" id="faq3">
+            <button class="faq-question" onclick="toggleFaq('faq3')">
+              Is my company's content and data secure?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq3-answer">
+              <div class="faq-answer-inner">Absolutely. All data is encrypted in transit and at rest. We never use your content to train AI models. Your posts, your voice briefs, and your campaign data belong to you and are never shared. PostLodge is built with GDPR compliance in mind, and enterprise customers can request a DPA.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-cta">
+    <div class="container">
+      <h2>Not sure which path is right?</h2>
+      <p>Start with the free trial and we'll help you figure out if Done-For-You makes sense.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Try for Free</a>
+        <a href="/cdn-cgi/l/email-protection#f8909d949497b888978b8c94979c9f9dd6998888" class="btn btn-ghost">Talk to the Team</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== PRICING PAGE ===================== -->
+<section id="page-pricing" class="page">
+
+  <div class="pricing-hero">
+    <div class="container">
+      <span class="tag" style="background:rgba(34,197,94,0.12);color:var(--green-400);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;display:inline-block;margin-bottom:24px;">Pricing</span>
+      <h1>Pricing that makes<br>your CFO smile</h1>
+      <p>The average company spends $8,400/month on LinkedIn ads. PostLodge costs a fraction of that — and delivers compounding organic reach that doesn't disappear when you stop paying.</p>
+      <div class="pricing-toggle">
+        <span class="toggle-label active" id="toggle-monthly">Monthly</span>
+        <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
+          <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-label" id="toggle-annual">Annual</span>
+        <span class="annual-badge">2 months free</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-section">
+    <div class="container">
+      <div class="pricing-grid">
+
+        <!-- Connector -->
+        <div class="pricing-card">
+          <div class="plan-name">Connector</div>
+          <div class="plan-sub">Great for small GTM teams · Up to 5 seats</div>
+          <div class="plan-price">
+            <span class="price-amount" id="connector-price">$49</span>
+            <span style="font-size:0.9rem;color:var(--text-muted);"> / user / month</span>
+          </div>
+          <div class="price-annual" id="connector-annual">&nbsp;</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Up to 5 team members</li>
+            <li><span class="check">✓</span> AI voice matching per user</li>
+            <li><span class="check">✓</span> Campaign creation from brief</li>
+            <li><span class="check">✓</span> Post calendar & scheduling</li>
+            <li><span class="check">✓</span> Chrome extension access</li>
+            <li><span class="check">✓</span> Email support</li>
+          </ul>
+          <a href="https://postlodge.app" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">Start Free Trial</a>
+        </div>
+
+        <!-- Thought Leader -->
+        <div class="pricing-card featured">
+          <div class="popular-badge">⭐ Most Popular</div>
+          <div class="plan-name">Thought Leader</div>
+          <div class="plan-sub">Best value for scaling teams · Up to 20 seats</div>
+          <div class="plan-price">
+            <span class="price-amount" id="leader-price">$29</span>
+            <span style="font-size:0.9rem;color:var(--text-muted);"> / user / month</span>
+          </div>
+          <div class="price-annual" id="leader-annual">&nbsp;</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Connector</li>
+            <li><span class="check">✓</span> Up to 20 team members</li>
+            <li><span class="check">✓</span> Brand governance & approval workflows</li>
+            <li><span class="check">✓</span> Advanced voice analysis (20+ post history)</li>
+            <li><span class="check">✓</span> Priority support</li>
+            <li><span class="check">✓</span> Usage analytics dashboard</li>
+          </ul>
+          <a href="https://postlodge.app" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">Start Free Trial</a>
+        </div>
+
+        <!-- Amplify -->
+        <div class="pricing-card">
+          <div class="plan-name">Amplify</div>
+          <div class="plan-sub">For $10K+/month LinkedIn spenders · Agencies & Enterprise</div>
+          <div class="plan-price">
+            <span class="price-amount custom">Custom pricing</span>
+          </div>
+          <div class="price-annual">&nbsp;</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Unlimited seats</li>
+            <li><span class="check">✓</span> Done-for-you white glove service</li>
+            <li><span class="check">✓</span> Dedicated SMM + video content</li>
+            <li><span class="check">✓</span> Custom onboarding & strategy</li>
+            <li><span class="check">✓</span> SLA & dedicated account manager</li>
+            <li><span class="check">✓</span> Custom integrations available</li>
+            <li><span class="check">✓</span> DPA & enterprise security review</li>
+          </ul>
+          <a href="/cdn-cgi/l/email-protection#8ae2efe6e6e5cafae5f9fee6e5eeedefa4ebfafa" class="btn" style="width:100%;justify-content:center;background:var(--dark);color:white;font-weight:700;">Contact Sales</a>
+        </div>
+
+      </div>
+
+      <!-- ROI Card -->
+      <div class="roi-card">
+        <div class="roi-text">
+          <p>If you're spending <strong>$5,000/month on LinkedIn ads</strong>, PostLodge pays for itself with just 3 team members posting consistently — and the reach keeps compounding.</p>
+        </div>
+        <a href="javascript:void(0)" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),200)" class="btn btn-primary">Calculate Your Savings →</a>
+      </div>
+
+      <!-- FAQ on pricing page -->
+      <div style="padding-top:80px;">
+        <h2 class="section-title" style="margin-bottom:12px;">Still have questions?</h2>
+        <p class="section-sub" style="margin-bottom:40px;">Everything you need to know before you sign up.</p>
+        <div class="faq-list">
+          <div class="faq-item" id="pfaq1">
+            <button class="faq-question" onclick="toggleFaq('pfaq1')">
+              How is this different from just using ChatGPT?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="pfaq1-answer">
+              <div class="faq-answer-inner">ChatGPT generates generic content. PostLodge analyzes each team member's actual LinkedIn posts, extracts their tone, vocabulary, and communication patterns, then generates content that sounds like <em>them</em> — not like AI. It also handles brand governance, campaign management, multi-person workflows, and scheduling. ChatGPT is a blank canvas. PostLodge is a purpose-built GTM content engine.</div>
+            </div>
+          </div>
+          <div class="faq-item" id="pfaq2">
+            <button class="faq-question" onclick="toggleFaq('pfaq2')">
+              Is this compliant with LinkedIn's Terms of Service?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="pfaq2-answer">
+              <div class="faq-answer-inner">Yes. PostLodge does not auto-publish anything to LinkedIn. Every post requires manual review and manual posting by the team member. We use LinkedIn profile data only for style analysis — no scraping at scale, no bots, no automation that violates LinkedIn's ToS. Your team stays in full control of what goes live and when.</div>
+            </div>
+          </div>
+          <div class="faq-item" id="pfaq3">
+            <button class="faq-question" onclick="toggleFaq('pfaq3')">
+              Is my company's content and data secure?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="pfaq3-answer">
+              <div class="faq-answer-inner">Absolutely. All data is encrypted in transit and at rest. We never use your content to train AI models. Your posts, your voice briefs, and your campaign data belong to you and are never shared. PostLodge is built with GDPR compliance in mind, and enterprise customers can request a DPA.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-cta">
+    <div class="container">
+      <h2>Start free. No credit card.<br>No commitment.</h2>
+      <p>Cancel anytime. Most teams see ROI in the first 30 days.</p>
+      <a href="https://postlodge.app" target="_blank" class="btn btn-primary">Try PostLodge Free</a>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" onclick="showPage('home')" style="display:inline-flex;margin-bottom:4px;">
+          <!-- LOGO: Replace with <img src="logo.svg"> -->
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE0GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTA3LTIwPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjVlMTllMjc0LWUyYzktNGFlMy04MmJlLTY5ZmI5YjllYzIxMzwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5VbnRpdGxlZCBkZXNpZ24gLSA0PC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlv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" alt="PostLodge" class="nav-logo-img" style="width:36px;height:36px;">
+          <span class="nav-logo-text" style="font-size:1.1rem;">PostLodge</span>
+        </a>
+        <p class="tagline">Stop buying attention.<br>Start earning it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('pricing')">Pricing</a></li>
+          <li><a href="https://postlodge.app" target="_blank">Try for Free</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a onclick="showPage('about')">About</a></li>
+          <li><a onclick="showPage('services')">Services</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#95fdf0f9f9fad5e5fae6e1f9faf1f2f0bbf4e5e5">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="javascript:void(0)">Privacy Policy</a></li>
+          <li><a href="javascript:void(0)">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 PostLodge. All rights reserved. Not affiliated with LinkedIn Corporation.</span>
+      <div class="footer-social">
+        <span class="footer-social-text">Built by a founder, for founders.</span>
+        <a href="https://linkedin.com/company/postlodge" target="_blank" class="social-icon" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ===== PAGE NAVIGATION =====
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + page);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Update meta title
+    const titles = {
+      home: 'PostLodge — Stop Buying Attention. Start Earning It.',
+      about: 'About — PostLodge',
+      services: 'Services — PostLodge',
+      pricing: 'Pricing — PostLodge'
+    };
+    document.title = titles[page] || titles.home;
+  }
+
+  // ===== MOBILE MENU =====
+  function toggleMobile() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ===== FAQ ACCORDION =====
+  function toggleFaq(id) {
+    const item = document.getElementById(id);
+    const answer = document.getElementById(id + '-answer');
+    const isOpen = item.classList.contains('open');
+    // Close all in same list
+    item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      const a = i.querySelector('.faq-answer');
+      if (a) a.style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  // ===== BILLING TOGGLE =====
+  let isAnnual = false;
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('billingToggle');
+    const mLabel = document.getElementById('toggle-monthly');
+    const aLabel = document.getElementById('toggle-annual');
+    toggle.classList.toggle('on', isAnnual);
+    mLabel.classList.toggle('active', !isAnnual);
+    aLabel.classList.toggle('active', isAnnual);
+
+    // Connector: $49/mo → $490/yr (vs $588)
+    document.getElementById('connector-price').textContent = isAnnual ? '$41' : '$49';
+    document.getElementById('connector-annual').innerHTML = isAnnual
+      ? '<s>$588/yr</s> <strong>$490/yr — save $98</strong>'
+      : '&nbsp;';
+
+    // Thought Leader: $29/mo → $290/yr (vs $348)
+    document.getElementById('leader-price').textContent = isAnnual ? '$24' : '$29';
+    document.getElementById('leader-annual').innerHTML = isAnnual
+      ? '<s>$348/yr</s> <strong>$290/yr — save $58</strong>'
+      : '&nbsp;';
+  }
+
+  // ===== FREE POST GENERATOR =====
+  function handleGenerate() {
+    const btn = document.getElementById('generateBtn');
+    const campaign = document.getElementById('campaignInput').value.trim();
+    if (!campaign) {
+      document.getElementById('campaignInput').focus();
+      document.getElementById('campaignInput').style.borderColor = '#ef4444';
+      setTimeout(() => document.getElementById('campaignInput').style.borderColor = '#e5e7eb', 2000);
+      return;
+    }
+    btn.classList.add('loading');
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      // Update modal content based on voice selection
+      const voice = document.getElementById('voiceSelect').value;
+      const voiceMap = {
+        'Founder': { name: 'Vojdan M.', title: 'Founder at PostLodge • 1st', letter: 'V' },
+        'Head of Marketing': { name: 'Sarah K.', title: 'Head of Marketing • 1st', letter: 'S' },
+        'AE': { name: 'James R.', title: 'Account Executive • 1st', letter: 'J' },
+        'SDR': { name: 'Priya T.', title: 'Sales Development Rep • 1st', letter: 'P' },
+        'CSM': { name: 'Alex M.', title: 'Customer Success Manager • 1st', letter: 'A' }
+      };
+      const v = voiceMap[voice] || voiceMap['Founder'];
+      document.getElementById('postAvatar').textContent = v.letter;
+      document.getElementById('postName').textContent = v.name;
+      document.getElementById('postTitle').textContent = v.title;
+
+      // Show modal
+      document.getElementById('postModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }, 1500);
+  }
+
+  function closeModal() {
+    document.getElementById('postModal').classList.remove('open');
+    document.body.style.ov
